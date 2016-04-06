@@ -1,20 +1,25 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.TreeSet;
 
 public class KMeansClusterer {
-	ArrayList<Record> records;
-	int numberOfClusters;
-	long seed;
-	boolean hasSetParameters = false;
-	HashMap<Integer, double[]> clusterCentroids;
-	int[] clustersThatRecordsBelongTo;
+	private ArrayList<Record> records;
+	private int numberOfClusters;
+	private long seed;
+	private boolean hasSetParameters = false;
+	private HashMap<Integer, double[]> clusterCentroids;
+	private int[] clustersThatRecordsBelongTo;
+	private int MAX_ITERATIONS = 100;
+	
 	public KMeansClusterer(ArrayList<Record> records) {
 		this.records = records;
 		this.numberOfClusters = 4;
 		this.seed = 43546903;
 		this.clustersThatRecordsBelongTo = new int[this.records.size()];
 	}
+	
 	public boolean setParameters(int numberOfClusters, int seed){
 		if(hasSetParameters == false){
 			if(numberOfClusters > this.records.size()){
@@ -32,13 +37,31 @@ public class KMeansClusterer {
 		}
 	}
 	
-	private void initializeCentroids(HashMap<Integer, double[]> centroids){
+	private void initializeCentroids(){
 		Random rng = new Random(this.seed);
-		for(int i = 0; i < this.numberOfClusters;i++){
+		TreeSet<Integer> selectedIndicesOfRecords = new TreeSet<>();
+		int i = 0;
+		while(i < numberOfClusters){
 			int index = rng.nextInt(this.records.size());
-			if (clusterCentroids.containsKey(index) == false) {
-				clusterCentroids.put(index, records.get(index).getAttrList());
+			if(selectedIndicesOfRecords.contains(index) == false){
+				clusterCentroids.put(i, records.get(index).getAttrList());
+				selectedIndicesOfRecords.add(index);
+				i++;
 			}
+		}
+	}
+	
+	public void cluster(){
+		if(hasSetParameters == false){
+			System.out.println("you must set the parameters before performing k-means clustering.");
+			return;
+		}
+		initializeCentroids();
+		int counter = 0;
+		while(counter < MAX_ITERATIONS){
+			assignToClosestClusters();
+			clusterCentroids = computeCentroids();
+			counter++;
 		}
 	}
 	
@@ -49,6 +72,9 @@ public class KMeansClusterer {
 			double closestDistance = Double.MAX_VALUE;
 			for(int j = 0; j < clusterCentroids.size(); j++){
 				double[] centroidAttrs = clusterCentroids.get(j);
+				if(centroidAttrs == null){
+					System.out.println("nullsldkfjsl;dkjf");
+				}
 				double dist = euclideanDistance(recordAttrs, centroidAttrs);
 				if(dist < closestDistance){
 					closestDistance = dist;
@@ -59,10 +85,39 @@ public class KMeansClusterer {
 		}
 	}
 	
-	private void computeCentroids(){
+	private HashMap<Integer, double[]> computeCentroids(){
+		HashMap<Integer, double[]> newCentroids = new HashMap<>();
+		int[] quantityInCluster = new int[numberOfClusters];
+		//first I get the sum of the cluster, then divide by the mean.
+		for(int i = 0; i < records.size(); i++){
+			double[] attr = records.get(i).getAttrList();
+			int cluster = clustersThatRecordsBelongTo[i];
+			if (newCentroids.containsKey(cluster) == false) {
+				double[] firstPoint = Arrays.copyOf(attr, attr.length);
+				newCentroids.put(cluster, firstPoint);
+			} else {//getting the sum of the points in a cluster
+				double[] developingCentroid = newCentroids.get(cluster);
+				for(int j = 0; j < developingCentroid.length;j++){
+					developingCentroid[j] += attr[j];
+				}
+			}
+			quantityInCluster[cluster]++;
+		}
 		
+		for(Integer cluster: clusterCentroids.keySet()){
+			if (newCentroids.containsKey(cluster)) {
+				double[] theCentroid = newCentroids.get(cluster);
+				for(int k = 0; k < theCentroid.length;k++){
+					theCentroid[k] /= quantityInCluster[cluster];
+				}
+			}else{//if the new set of centroids has no records
+				double[] origionalAttrs = clusterCentroids.get(cluster);
+				double[] sameAttr = Arrays.copyOf(origionalAttrs, origionalAttrs.length);
+				newCentroids.put(cluster, sameAttr);			
+			}
+		}
+		return newCentroids;
 	}
-	
 	
 	private double euclideanDistance(double[] p1, double[] p2){
 		assert p1.length == p2.length;
@@ -76,10 +131,22 @@ public class KMeansClusterer {
 	
 	public String toString(){
 		StringBuffer sb = new StringBuffer("");
+		
+		for(int i = 0; i < numberOfClusters;i++){
+			sb.append(String.format("Cluster %d\n", i));
+			for(int k = 0; k < records.size(); k++){
+				if (clustersThatRecordsBelongTo[k] == i) {
+					sb.append(String.format("%s\n", records.get(k).toString()));
+				}
+			}
+		}
+		sb.replace(sb.length() - 1, sb.length(), "");
+		/*
 		for (Record record : records) {
 			sb.append(record.toString());
 			sb.append("\n");
 		}
+		*/
 		return sb.toString();
 	}
 }
