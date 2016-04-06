@@ -5,7 +5,7 @@ public class Driver1 {
 		KMeansIO kmIO = new KMeansIO();
 		KMeansClusterer kmc = null;
 		try {
-			kmc = kmIO.instantiateKMeansClusterer("Archive/file2");
+			kmc = kmIO.instantiateKMeansClusterer("Archive/file1");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
