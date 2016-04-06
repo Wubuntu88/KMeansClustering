@@ -79,9 +79,7 @@ public class KMeansIO {
 	}
 	
 	private Record translateLineComponentsIntoRecords(String[] comps){
-		double[] attrs = null;
-
-		attrs = new double[comps.length];
+		double[] attrs = new double[comps.length];
 
 		for(int colIndex = 0; colIndex < comps.length; colIndex++){
 			String attrType = attributeTypeList.get(colIndex);
