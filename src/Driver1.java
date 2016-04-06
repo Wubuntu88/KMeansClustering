@@ -10,7 +10,10 @@ public class Driver1 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(kmc.toString());
+		//System.out.println(kmc.toString());
+		kmc.setParameters(4, 92378);
+		kmc.cluster();
+		System.out.println(kmc);
 	}
 
 }
