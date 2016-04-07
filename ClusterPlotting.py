@@ -5,9 +5,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 colors = ["red", "blue", "brown", "orange", "teal"]
-
+xLabel = "X"
+yLabel = "Y"
+title = "K means clustering; clusters = "
 f = open("output1.txt")
-
+title += str(f.readline().split(" ")[0])
 Clusters = ["Cluster "+str(i) for i in range(0,5)]
 arr_of_xs = []
 arr_of_ys = []
@@ -26,4 +28,8 @@ for i in range(0, len(arr_of_xs)):
     xs = arr_of_xs[i]
     ys = arr_of_ys[i]
     plt.scatter(xs, ys, s=100, c=colors[i])
+    
+plt.title(title)
+plt.xlabel(xLabel)
+plt.ylabel(yLabel)
 plt.show()
