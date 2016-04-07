@@ -27,7 +27,7 @@ public class KMeansClusterer {
 	public int[] clustersThatRecordsBelongToCopy(){
 		return Arrays.copyOf(clustersThatRecordsBelongTo, clustersThatRecordsBelongTo.length);
 	}
-	private int MAX_ITERATIONS = 100;
+	private int MAX_ITERATIONS = 10;
 	
 	public KMeansClusterer(ArrayList<Record> records) {
 		this.records = records;
@@ -79,6 +79,7 @@ public class KMeansClusterer {
 			assignToClosestClusters();
 			clusterCentroids = computeCentroids();
 			counter++;
+			System.out.println(centroidString());
 		}
 		hasPerformedClustering = true;
 	}
@@ -157,6 +158,19 @@ public class KMeansClusterer {
 			recordIndex++;
 		}
 		return sum;
+	}
+	
+	public String centroidString(){
+		StringBuffer sb = new StringBuffer("");
+		for(Integer cluster: clusterCentroids.keySet()){
+			sb.append(String.format("Cluster %d: ", cluster));
+			double[] centroid = clusterCentroids.get(cluster);
+			for(double number: centroid){
+				sb.append(String.format("%.2f, ", number));
+			}
+			sb.replace(sb.length() - 2, sb.length(), "\n");//replace ", " with "\n" at end
+		}
+		return sb.toString();
 	}
 	
 	public String toString(){
