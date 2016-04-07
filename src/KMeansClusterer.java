@@ -8,12 +8,25 @@ import java.util.TreeSet;
 
 public class KMeansClusterer {
 	private ArrayList<Record> records;
+	public ArrayList<Record> recordsCopy(){
+		ArrayList<Record> copy = new ArrayList<>();
+		for(Record record: records){
+			copy.add(new Record(record.getAttrList()));
+		}
+		return copy;
+	}
 	private int numberOfClusters;
+	public int getNumberOfClusters() {
+		return numberOfClusters;
+	}
 	private long seed;
 	private boolean hasSetParameters = false;
 	private boolean hasPerformedClustering = false;
 	private HashMap<Integer, double[]> clusterCentroids;
 	private int[] clustersThatRecordsBelongTo;
+	public int[] clustersThatRecordsBelongToCopy(){
+		return Arrays.copyOf(clustersThatRecordsBelongTo, clustersThatRecordsBelongTo.length);
+	}
 	private int MAX_ITERATIONS = 100;
 	
 	public KMeansClusterer(ArrayList<Record> records) {
@@ -132,21 +145,18 @@ public class KMeansClusterer {
 		return Math.sqrt(sum_sq_err);
 	}
 	
-	public void writeClusteredRecordsToFile(String fileName){
-		if(hasPerformedClustering){
-			PrintWriter pw = null;
-			try {
-				pw = new PrintWriter(fileName);
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			pw.print(this.toString());
-			pw.close();
-		}else{
-			System.out.println("You must cluster records before writing to a file.");
+	public double sumSquaredError(){
+		double sum = 0.0;
+		int recordIndex = 0;
+		for (Record record : this.records) {
+			double[] attrs = record.getAttrList();
+			int clusterOfRecord = clustersThatRecordsBelongTo[recordIndex];
+			double[] centroid = clusterCentroids.get(clusterOfRecord);
+			double dist = euclideanDistance(attrs, centroid);
+			sum += Math.pow(dist, 2);
+			recordIndex++;
 		}
-		
+		return sum;
 	}
 	
 	public String toString(){
@@ -163,4 +173,5 @@ public class KMeansClusterer {
 		sb.replace(sb.length() - 1, sb.length(), "");
 		return sb.toString();
 	}
+	
 }
