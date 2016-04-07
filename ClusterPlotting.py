@@ -25,5 +25,5 @@ for line in f:
 for i in range(0, len(arr_of_xs)):
     xs = arr_of_xs[i]
     ys = arr_of_ys[i]
-    plt.scatter(xs, ys, s=50, c=colors[i])
+    plt.scatter(xs, ys, s=100, c=colors[i])
 plt.show()
