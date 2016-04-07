@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Driver1 {
 
@@ -16,7 +17,14 @@ public class Driver1 {
 		//System.out.println(kmc.toString());
 		kmc.setParameters(5, 92378);
 		kmc.cluster();
-		kmc.writeClusteredRecordsToFile(outputFile);
+		
+		ArrayList<Record> denormalizedRecords = kmc.recordsCopy();
+		int[] clustersRecordsBelongTo = kmc.clustersThatRecordsBelongToCopy();
+		int numClusters = kmc.getNumberOfClusters();
+		kmIO.writeClusteredRecordsToFile(outputFile, denormalizedRecords, clustersRecordsBelongTo, numClusters);
+		
+		System.out.println(String.format("Clustering records with %s clusters.", kmc.getNumberOfClusters()));
+		System.out.println(String.format("sum squared error: %f", kmc.sumSquaredError()));
 	}
 
 }
