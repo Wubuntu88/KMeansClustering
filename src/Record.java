@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Record {
 
 	private double[] attrList;
@@ -6,7 +8,7 @@ public class Record {
 	}
 
 	public Record(double[] attrList) {
-		this.attrList = attrList;
+		this.attrList = Arrays.copyOf(attrList, attrList.length);
 	}
 	
 	public int numberOfAttributes(){
