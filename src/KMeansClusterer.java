@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,6 +11,7 @@ public class KMeansClusterer {
 	private int numberOfClusters;
 	private long seed;
 	private boolean hasSetParameters = false;
+	private boolean hasPerformedClustering = false;
 	private HashMap<Integer, double[]> clusterCentroids;
 	private int[] clustersThatRecordsBelongTo;
 	private int MAX_ITERATIONS = 100;
@@ -49,6 +52,7 @@ public class KMeansClusterer {
 				i++;
 			}
 		}
+		
 	}
 	
 	public void cluster(){
@@ -63,6 +67,7 @@ public class KMeansClusterer {
 			clusterCentroids = computeCentroids();
 			counter++;
 		}
+		hasPerformedClustering = true;
 	}
 	
 	private void assignToClosestClusters(){
@@ -72,9 +77,7 @@ public class KMeansClusterer {
 			double closestDistance = Double.MAX_VALUE;
 			for(int j = 0; j < clusterCentroids.size(); j++){
 				double[] centroidAttrs = clusterCentroids.get(j);
-				if(centroidAttrs == null){
-					System.out.println("nullsldkfjsl;dkjf");
-				}
+				
 				double dist = euclideanDistance(recordAttrs, centroidAttrs);
 				if(dist < closestDistance){
 					closestDistance = dist;
@@ -129,6 +132,23 @@ public class KMeansClusterer {
 		return Math.sqrt(sum_sq_err);
 	}
 	
+	public void writeClusteredRecordsToFile(String fileName){
+		if(hasPerformedClustering){
+			PrintWriter pw = null;
+			try {
+				pw = new PrintWriter(fileName);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			pw.print(this.toString());
+			pw.close();
+		}else{
+			System.out.println("You must cluster records before writing to a file.");
+		}
+		
+	}
+	
 	public String toString(){
 		StringBuffer sb = new StringBuffer("");
 		
@@ -141,12 +161,6 @@ public class KMeansClusterer {
 			}
 		}
 		sb.replace(sb.length() - 1, sb.length(), "");
-		/*
-		for (Record record : records) {
-			sb.append(record.toString());
-			sb.append("\n");
-		}
-		*/
 		return sb.toString();
 	}
 }
