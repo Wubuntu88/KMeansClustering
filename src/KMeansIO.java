@@ -128,6 +128,7 @@ public class KMeansIO {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		pw.println(String.format("%d clusters", numberOfClusters));
 		String str = clusterResultsString(denormalizedRecords, clustersThatRecordsBelongTo, numberOfClusters);
 		pw.print(str);
 		pw.close();
