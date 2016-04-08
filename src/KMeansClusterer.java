@@ -1,5 +1,3 @@
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -65,23 +63,28 @@ public class KMeansClusterer {
 				i++;
 			}
 		}
-		
 	}
 	
 	public void cluster(){
-		if(hasSetParameters == false){
-			System.out.println("you must set the parameters before performing k-means clustering.");
-			return;
+		if(hasPerformedClustering == false){
+			if(hasSetParameters == false){
+				System.out.println("you must set the parameters before performing k-means clustering.");
+				return;
+			}
+			initializeCentroids();
+			int counter = 0;
+			while(counter < MAX_ITERATIONS){
+				assignToClosestClusters();
+				clusterCentroids = computeCentroids();
+				counter++;
+				System.out.println(String.format("Iteration %d: ", counter));
+				System.out.println(centroidString());
+			}
+			hasPerformedClustering = true;
+		}else{
+			System.out.println("You may not perform clustering twice.");
+			System.out.println("Instead, recreate a new KMeansClusterer.");
 		}
-		initializeCentroids();
-		int counter = 0;
-		while(counter < MAX_ITERATIONS){
-			assignToClosestClusters();
-			clusterCentroids = computeCentroids();
-			counter++;
-			System.out.println(centroidString());
-		}
-		hasPerformedClustering = true;
 	}
 	
 	private void assignToClosestClusters(){
