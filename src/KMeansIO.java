@@ -75,8 +75,8 @@ public class KMeansIO {
 			Record record = translateLineComponentsIntoRecords(comps);
 			records.add(record);
 		}
-		KMeansClusterer nnc = new KMeansClusterer(records);
-		return nnc;
+		KMeansClusterer kmc = new KMeansClusterer(records);
+		return kmc;
 	}
 
 	private Record translateLineComponentsIntoRecords(String[] comps) {
