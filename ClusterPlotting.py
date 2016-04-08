@@ -3,12 +3,15 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
 
+fileName = str(sys.argv[1])
+print(fileName)
 colors = ["red", "blue", "brown", "orange", "teal"]
 xLabel = "X"
 yLabel = "Y"
 title = "K means clustering; clusters = "
-f = open("output1.txt")
+f = open(fileName)
 title += str(f.readline().split(" ")[0])
 Clusters = ["Cluster "+str(i) for i in range(0,5)]
 arr_of_xs = []
