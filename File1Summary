@@ -1,0 +1,97 @@
+Summary of File 1 results | William Gillespie
+
+For 3 clusters (the trace of the 3 clusters is at the end)
+normalized centroids at end of clustering:
+Cluster 0: 0.50, 0.79
+Cluster 1: 0.77, 0.34
+Cluster 2: 0.25, 0.38
+
+Clustering records with 3 clusters.
+sum squared error: 5.076387
+
+For 2 clusters:
+normalized centroids at end of clustering:
+Cluster 0: 0.30, 0.55
+Cluster 1: 0.75, 0.39
+
+Clustering records with 2 clusters.
+sum squared error: 7.900525
+
+For 5 clusters:
+normalized centroids at end of clustering:
+Cluster 0: 0.48, 0.79
+Cluster 1: 0.88, 0.47
+Cluster 2: 0.34, 0.39
+Cluster 3: 0.08, 0.40
+Cluster 4: 0.62, 0.22
+
+Clustering records with 5 clusters.
+sum squared error: 3.157098
+
+For 10 clusters:
+normalized centroids at end of clustering:
+Cluster 0: 0.37, 0.85
+Cluster 1: 0.91, 0.66
+Cluster 2: 0.17, 0.50
+Cluster 3: 0.01, 0.39
+Cluster 4: 0.70, 0.46
+Cluster 5: 0.62, 0.74
+Cluster 6: 0.64, 0.10
+Cluster 7: 0.24, 0.32
+Cluster 8: 0.48, 0.36
+Cluster 9: 0.96, 0.19
+
+Clustering records with 10 clusters.
+sum squared error: 1.151598
+/*------------------------------*/
+The traces of the centroids for 3 clusters with 10 iterations (the first part).
+As you can see, it converges pretty quickly.
+Iteration 1: 
+Cluster 0: 0.52, 0.72
+Cluster 1: 0.87, 0.40
+Cluster 2: 0.33, 0.36
+
+Iteration 2: 
+Cluster 0: 0.50, 0.78
+Cluster 1: 0.84, 0.37
+Cluster 2: 0.33, 0.35
+
+Iteration 3: 
+Cluster 0: 0.50, 0.79
+Cluster 1: 0.80, 0.36
+Cluster 2: 0.29, 0.37
+
+Iteration 4: 
+Cluster 0: 0.50, 0.79
+Cluster 1: 0.78, 0.35
+Cluster 2: 0.26, 0.38
+
+Iteration 5: 
+Cluster 0: 0.50, 0.79
+Cluster 1: 0.77, 0.34
+Cluster 2: 0.25, 0.38
+
+Iteration 6: 
+Cluster 0: 0.50, 0.79
+Cluster 1: 0.77, 0.34
+Cluster 2: 0.25, 0.38
+
+Iteration 7: 
+Cluster 0: 0.50, 0.79
+Cluster 1: 0.77, 0.34
+Cluster 2: 0.25, 0.38
+
+Iteration 8: 
+Cluster 0: 0.50, 0.79
+Cluster 1: 0.77, 0.34
+Cluster 2: 0.25, 0.38
+
+Iteration 9: 
+Cluster 0: 0.50, 0.79
+Cluster 1: 0.77, 0.34
+Cluster 2: 0.25, 0.38
+
+Iteration 10: 
+Cluster 0: 0.50, 0.79
+Cluster 1: 0.77, 0.34
+Cluster 2: 0.25, 0.38
