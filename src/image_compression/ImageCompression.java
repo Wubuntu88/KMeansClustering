@@ -15,13 +15,13 @@ public class ImageCompression {
 
     public static void main(String[] args) throws Exception {
 	String inputFile = "imagefile";
-	String clusterOutputs = "ClusterOutputs/8Clusters.txt";
-	String compressedImageFile = "ImageOutputs/compressedImage8clusters";
+	//String clusterOutputs = "ClusterOutputs/8Clusters.txt";
+	String compressedImageFile = "ImageOutputs/compressedTextImage128clusters";
 
 	int origRows = 512;
 	int origCols = 512;
 
-	final int NUMBER_OF_CENTROIDS = 8;
+	final int NUMBER_OF_CENTROIDS = 128;
 	ArrayList<Record> records = new ArrayList<>();
 	List<String> lines = Files.readAllLines(Paths.get(inputFile), Charset.defaultCharset());
 	for (String line : lines) {

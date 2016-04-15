@@ -11,8 +11,8 @@ import java.util.List;
 public class ImageDecompression {
 
     public static void main(String[] args) throws Exception {
-	String inputFile = "ImageOutputs/compressedImage8clusters";
-	String outputFile = "ImageOutputs/decompressedImage8clusters";
+	String inputFile = "ImageOutputs/compressedTextImage128clusters";
+	String outputFile = "ImageOutputs/decompressedTextImage128clusters";
 
 	decompressImageAndSave(inputFile, outputFile);
     }
