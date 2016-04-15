@@ -7,7 +7,14 @@ import sys
 
 fileName = str(sys.argv[1])
 print(fileName)
-colors = ["red", "blue", "brown", "orange", "teal"]
+colors = ["red", "blue", "brown", "orange", "teal", "pink", "indigo", "violet",
+        "aquamarine", "azure", "beige", "burlywood", "coral", "crimson", "deeppink", "darksalmon",
+        "darkgoldenrod", "darkkhaki", "darkolivegreen", "darkorange", "gold", "gainsboro", "fuchsia", "palevioletred",
+        "papayawhip", "rosybrown", "saddlebrown", "seashell", "lavender", "khaki", "indianred", "honeydew",
+        "yellowgreen", "yellow", "wheat", "turquoise", "tomato", "thistle", "tan", "springgreen",
+        "royalblue", "sandybrown", "seagreen", "sienna", "skyblue", "slateblue", "slategray", "snow", 
+        "palegoldenrod", "palegreen", "paleturquoise", "palevioletred", "peachpuff", "peru", "plum", "powderblue",
+        "midnightblue", "mintcream", "mistyrose", "moccasin", "oldlace", "olivedrab", "orangered", "orchid"]
 xLabel = "X"
 yLabel = "Y"
 title = "K means clustering; clusters = "
