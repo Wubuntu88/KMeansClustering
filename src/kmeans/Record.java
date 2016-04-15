@@ -1,3 +1,4 @@
+package kmeans;
 import java.util.Arrays;
 
 public class Record {
