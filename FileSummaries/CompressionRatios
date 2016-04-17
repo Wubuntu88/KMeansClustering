@@ -1,0 +1,7 @@
+Compression ratios (as percents) of compressed image to original image | William Gillespie
+Note: this is the output of the DetermineCompressionRatio.java Driver
+compression ratio (8 clusters): 26.9 %
+compression ratio (16 clusters): 33.0 %
+compression ratio (32 clusters): 36.4 %
+compression ratio (64 clusters): 38.6 %
+compression ratio (128 clusters): 42.5 %
