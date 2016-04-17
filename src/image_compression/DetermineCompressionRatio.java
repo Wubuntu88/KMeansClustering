@@ -30,6 +30,4 @@ public class DetermineCompressionRatio {
 		double ratio = (double)compFile.length() / origFile.length();
 		return ratio;
 	}
-	
-	
 }
