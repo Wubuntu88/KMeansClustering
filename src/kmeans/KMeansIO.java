@@ -1,4 +1,5 @@
 package kmeans;
+
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
@@ -111,18 +112,18 @@ public class KMeansIO {
 		return origionalNumber;
 	}
 
-	public void writeClusteredRecordsToFile(String fileName, ArrayList<Record> records, 
+	public void writeClusteredRecordsToFile(String fileName, ArrayList<Record> records,
 			int[] clustersThatRecordsBelongTo, int numberOfClusters) {
 		ArrayList<Record> denormalizedRecords = new ArrayList<>();
-		for(Record record: records){
+		for (Record record : records) {
 			double[] attrs = new double[record.getAttrList().length];
-			for(int i = 0; i < attrs.length;i++){
+			for (int i = 0; i < attrs.length; i++) {
 				attrs[i] = denormalizeContinousNumberAtColumn(record.getAttrList()[i], i);
 			}
 			Record recordToAdd = new Record(attrs);
 			denormalizedRecords.add(recordToAdd);
 		}
-		
+
 		PrintWriter pw = null;
 		try {
 			pw = new PrintWriter(fileName);
